@@ -2,6 +2,7 @@
   "name": "soundtag-creator",
   "version": "1.0.0",
   "dependencies": {
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "faunadb": "^4.8.0"
   }
 }
