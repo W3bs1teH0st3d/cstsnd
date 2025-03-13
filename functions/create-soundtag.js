@@ -17,18 +17,22 @@ exports.handler = async (event) => {
         const { title, text, imageUrl, soundUrl, background } = JSON.parse(event.body);
         const sndtagid = uuidv4();
 
-        await client.query(
+        console.log('Создание SoundTag:', { sndtagid, title, text, imageUrl, soundUrl, background });
+
+        const result = await client.query(
             q.Create(q.Collection('soundtags'), {
                 data: { sndtagid, title, text, imageUrl, soundUrl, background }
             })
         );
+
+        console.log('Успешно сохранено в FaunaDB:', result);
 
         return {
             statusCode: 200,
             body: JSON.stringify({ sndtagid })
         };
     } catch (error) {
-        console.error('Ошибка в функции:', error);
+        console.error('Ошибка в create-soundtag:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Ошибка сервера', details: error.message })
